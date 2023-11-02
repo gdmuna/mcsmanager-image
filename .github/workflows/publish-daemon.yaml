@@ -54,7 +54,7 @@ jobs:
       - name: "Docker: Build and Push Image"
         uses: docker/build-push-action@v3
         with:
-          push: ${{ steps.dispatch-check.outputs.is_workflow_dispatch != 'true' }}
+          push: true
           context: .
           file: ./Dockerfile.daemon
           platforms: linux/amd64,linux/arm64

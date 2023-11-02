@@ -1,6 +1,7 @@
 FROM node:14-alpine
 
-RUN apk --no-cache add git openjdk-22-jdk \
+RUN apk --no-cache add git \
+  && apk --no-cache add openjdk22-jdk \
   && git clone https://github.com/MCSManager/MCSManager-Daemon-Production /data/mcsmanager/daemon --depth=1 \
   && cd /data/mcsmanager/daemon && npm i --production \
   && mkdir -p /data/mcsmanager/daemon/data
