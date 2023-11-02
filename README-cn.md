@@ -22,7 +22,7 @@
 docker run -it -d \
     --name mcsm-web \
     -p 23333:23333 \
-    -v /path/to/data:/opt/mcsmanager/web/data \
+    -v /path/to/data:/data/mcsmanager/web/data \
     alisaqaq/mcsmanager-web:latest
 ```
 
@@ -38,7 +38,7 @@ services:
     ports:
       - "23333:23333"
     volumes:
-      - /path/to/data:/opt/mcsmanager/web/data
+      - /path/to/data:/data/mcsmanager/web/data
     restart: unless-stopped
 ```
 
@@ -50,7 +50,7 @@ services:
 docker run -it -d \
     --name mcsm-daemon \
     -p 24444:24444 \
-    -v /path/to/data:/opt/mcsmanager/daemon/data \
+    -v /path/to/data:/data/mcsmanager/daemon/data \
     -v /var/run/docker.sock:/var/run/docker.sock \
     alisaqaq/mcsmanager-daemon:latest
 ```
@@ -67,7 +67,7 @@ services:
     ports:
       - "24444:24444"
     volumes:
-      - /path/to/data:/opt/mcsmanager/daemon/data
+      - /path/to/data:/data/mcsmanager/daemon/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 ```
@@ -174,7 +174,7 @@ spec:
               name: mcsm-web
           volumeMounts:
             - name: data
-              mountPath: /opt/mcsmanager/web/data
+              mountPath: /data/mcsmanager/web/data
       volumes:
         - name: data
           persistentVolumeClaim:

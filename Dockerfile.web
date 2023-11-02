@@ -1,17 +1,16 @@
 FROM node:14-alpine
 
 RUN apk --no-cache add git
-RUN git clone https://github.com/MCSManager/MCSManager-Web-Production /opt/mcsmanager/web --depth=1
-RUN cd /opt/mcsmanager/web && npm i --production
-
-RUN mkdir -p /opt/mcsmanager/web/data
+  && git clone https://github.com/MCSManager/MCSManager-Web-Production /data/mcsmanager/web --depth=1
+  && cd /data/mcsmanager/web && npm i --production
+  && mkdir -p /data/mcsmanager/web/data
 
 ENV TZ=Asia/Shanghai
 
-VOLUME [ "/opt/mcsmanager/web/data" ]
+VOLUME [ "/data/mcsmanager/web/data" ]
 
 EXPOSE 23333
 
-WORKDIR /opt/mcsmanager/web
+WORKDIR /data/mcsmanager/web
 
 ENTRYPOINT [ "node", "app.js" ]

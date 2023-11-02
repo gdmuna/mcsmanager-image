@@ -1,18 +1,17 @@
 FROM node:14-alpine
 
-RUN apk --no-cache add git
-RUN git clone https://github.com/MCSManager/MCSManager-Daemon-Production /opt/mcsmanager/daemon --depth=1
-RUN cd /opt/mcsmanager/daemon && npm i --production
-
-RUN mkdir -p /opt/mcsmanager/daemon/data
+RUN apk --no-cache add git openjdk-22-jdk \
+  && git clone https://github.com/MCSManager/MCSManager-Daemon-Production /data/mcsmanager/daemon --depth=1 \
+  && cd /data/mcsmanager/daemon && npm i --production \
+  && mkdir -p /data/mcsmanager/daemon/data
 
 ENV TZ=Asia/Shanghai
 
 VOLUME [ "/var/run/docker.sock" ]
-VOLUME [ "/opt/mcsmanager/daemon/data" ]
+VOLUME [ "/data/mcsmanager/daemon/data" ]
 
 EXPOSE 24444
 
-WORKDIR /opt/mcsmanager/daemon
+WORKDIR /data/mcsmanager/daemon
 
 ENTRYPOINT [ "node", "app.js" ]
