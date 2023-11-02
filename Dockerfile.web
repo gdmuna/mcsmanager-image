@@ -1,8 +1,8 @@
 FROM node:14-alpine
 
-RUN apk --no-cache add git
-  && git clone https://github.com/MCSManager/MCSManager-Web-Production /data/mcsmanager/web --depth=1
-  && cd /data/mcsmanager/web && npm i --production
+RUN apk --no-cache add git \
+  && git clone https://github.com/MCSManager/MCSManager-Web-Production /data/mcsmanager/web --depth=1 \
+  && cd /data/mcsmanager/web && npm i --production \
   && mkdir -p /data/mcsmanager/web/data
 
 ENV TZ=Asia/Shanghai
